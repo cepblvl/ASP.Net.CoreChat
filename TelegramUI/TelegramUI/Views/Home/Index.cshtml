@@ -1,0 +1,12 @@
+﻿@model IEnumerable<TelegramUI.Models.Users>
+@{
+    ViewBag.Title = "Все пользователи";
+}
+<a asp-action="Create">Добавить пользователя</a>
+<table class="table">
+    <tr><td>Имя</td></tr>
+    @foreach (var item in Model)
+    {
+        <tr><td>@item.id1</td></tr>
+    }
+</table>

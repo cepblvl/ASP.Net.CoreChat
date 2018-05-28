@@ -1,0 +1,11 @@
+c:\users\сергей\documents\visual studio 2017\Projects\TelegramBE\TelegramBE\bin\Debug\netcoreapp2.0\TelegramBE.deps.json
+c:\users\сергей\documents\visual studio 2017\Projects\TelegramBE\TelegramBE\bin\Debug\netcoreapp2.0\TelegramBE.runtimeconfig.json
+c:\users\сергей\documents\visual studio 2017\Projects\TelegramBE\TelegramBE\bin\Debug\netcoreapp2.0\TelegramBE.runtimeconfig.dev.json
+c:\users\сергей\documents\visual studio 2017\Projects\TelegramBE\TelegramBE\bin\Debug\netcoreapp2.0\TelegramBE.dll
+c:\users\сергей\documents\visual studio 2017\Projects\TelegramBE\TelegramBE\bin\Debug\netcoreapp2.0\TelegramBE.pdb
+c:\users\сергей\documents\visual studio 2017\Projects\TelegramBE\TelegramBE\obj\Debug\netcoreapp2.0\TelegramBE.csprojAssemblyReference.cache
+c:\users\сергей\documents\visual studio 2017\Projects\TelegramBE\TelegramBE\obj\Debug\netcoreapp2.0\TelegramBE.csproj.CoreCompileInputs.cache
+c:\users\сергей\documents\visual studio 2017\Projects\TelegramBE\TelegramBE\obj\Debug\netcoreapp2.0\TelegramBE.AssemblyInfoInputs.cache
+c:\users\сергей\documents\visual studio 2017\Projects\TelegramBE\TelegramBE\obj\Debug\netcoreapp2.0\TelegramBE.AssemblyInfo.cs
+c:\users\сергей\documents\visual studio 2017\Projects\TelegramBE\TelegramBE\obj\Debug\netcoreapp2.0\TelegramBE.dll
+c:\users\сергей\documents\visual studio 2017\Projects\TelegramBE\TelegramBE\obj\Debug\netcoreapp2.0\TelegramBE.pdb

@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "About";
+}
+<h2>@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+
+<p>Use this area to provide additional information.</p>
+<div id="result">
+
+</div>
+<div><p><button id="btn" value="Запрос">Запрос</button></p></div>
+<ul id="list"></ul>
+<script>
+        var btn = document.getElementById("btn");
+        var result = document.getElementById("result");
+        var request = new XMLHttpRequest();
+
+        btn.addEventListener("click", function (e) {
+
+            try {
+                request.open("GET", "http://localhost:60728/api/messeges");
+            }
+            catch (e) { alert("Server off");}
+                request.onreadystatechange = reqReadyStateChange;
+                request.send();
+
+
+
+        });
+        function showMesseges(messeges) {
+
+            messeges.forEach(function (messege) {
+                var li = list.appendChild(document.createElement('li'));
+                li.innerHTML = messege.id1 + ' ' + messege.id2 + ' ' + messege.text;
+            });
+
+        }
+        function reqReadyStateChange() {
+            if (request.readyState == 4) {
+                var status = request.status;
+                if (status == 200) {
+                    try {
+                        var messeges = JSON.parse(request.responseText);
+                    }
+                    catch (e) {
+                        alert("Некорректный ответ " + e.message);
+                    }
+                    showMesseges(messeges);
+                }
+                else alert(status + ': ' + "Не получен ответ от сервера");
+            }
+        }
+</script>

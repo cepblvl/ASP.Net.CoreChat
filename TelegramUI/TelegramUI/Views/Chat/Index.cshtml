@@ -1,0 +1,168 @@
+﻿
+@model TelegramUI.Models.Users
+@{
+    ViewData["Title"] = "Chat";
+}
+
+<h2>Chat</h2>
+
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Чат</title>
+    <link href="lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+
+    <script src="lib/jquery/dist/jquery.js"></script>
+</head>
+<body>
+    <h2>Чат</h2>
+
+    <form name="userForm" id="Form1" asp-action="create" asp-controller="Chat">
+
+        <div class="form-group">
+            <label asp-for="id1" class="control-label">Кто</label>
+            <input class="form-control" name="id1" />
+        </div>
+        <div class="form-group">
+            <label for="id2">С кем:</label>
+            <input class="form-control" name="id2" />
+        </div>
+        <div class="panel-body">
+            <button id="But1" type="submit" asp-page-handler="Enter" class="btn btn-sm btn-primary">Начать диалог</button>
+            <a id="reset" class="btn btn-sm btn-primary">Перевойти</a>
+        </div>
+    </form>
+    
+    <ul id="list"></ul>
+    <form name="userForm2" id="Form2">
+
+        <div class="form-group">
+
+            <input class="form-control" name="text" />
+        </div>
+        <div class="panel-body">
+            <button id="But2" type="submit" class="btn btn-sm btn-primary">Отправить</button>
+            <a id="reset2" class="btn btn-sm btn-primary">Проверить новые сообщения</a>
+        </div>
+    </form>
+   
+    <script>
+        $("#reset").click(function (e) {
+
+            e.preventDefault();
+            location.reload();
+
+        })
+        $("#reset2").click(function (e) {
+
+            e.preventDefault();
+            try {
+                request.open("GET", "http://localhost:60728/api/messeges" + "/" + id1 + "/" + id2);
+            }
+            catch (e) { alert("Server off"); }
+            request.onreadystatechange = reqReadyStateChange;
+            request.send()
+
+
+
+        })
+        
+
+        var id1 = "1";
+        var id2 = "2";
+        var request = new XMLHttpRequest();
+        $("form#Form1").submit(function (e) {
+            e.preventDefault();
+
+            id1 = this.elements["id1"].value;
+            id2 = this.elements["id2"].value;
+            
+
+            try {
+                request.open("GET", "http://localhost:60728/api/messeges" + "/" + id1 + "/" + id2);
+            }
+            catch (e) { alert("Server off"); }
+            request.onreadystatechange = reqReadyStateChange;
+            request.send()
+            But1.disabled = true;
+
+        });
+        var text = "0";
+        
+        $("form#Form2").submit(function (e) {
+            text = this.elements["text"].value;
+         
+           
+        e.preventDefault();
+        
+        Enter(id1, id2, text);
+            
+        });
+
+
+
+
+        
+        function showMesseges(messeges) {
+            while (list.childNodes[0]) {
+                list.removeChild(list.childNodes[0]);
+            }
+            messeges.forEach(function (messege) {
+                var li = list.appendChild(document.createElement('li'));
+                li.innerHTML = messege.id1 + '--->' + messege.id2 + '     ' + messege.text;
+            });
+
+        }
+       
+        function reqReadyStateChange() {
+            if (request.readyState == 4) {
+                var status = request.status;
+                if (status == 200) {
+                    try {
+                        var messeges = JSON.parse(request.responseText);
+                    }
+                    catch (e) {
+                        alert("Некорректный ответ " + e.message);
+                    }
+                    showMesseges(messeges);
+                }
+                else alert(status + ': ' + "Не получен ответ от сервера");
+            }
+        }
+
+        function Enter(id1, id2, text) {
+
+
+            $.ajax({
+                url: "http://localhost:60728/api/messeges",
+                contentType: "application/json",
+                method: "POST",
+                data: JSON.stringify({
+                    id1: id1,
+                    id2: id2,
+                    text: text
+                }),
+                success: function (user) {
+                   
+                    
+                    try {
+                        request.open("GET", "http://localhost:60728/api/messeges" + "/" + id1 + "/" + id2);
+                    }
+                    catch (e) { alert("Server off"); }
+                    request.onreadystatechange = reqReadyStateChange;
+                    request.send();
+                }
+            })
+            
+        }
+    </script>
+
+
+
+
+
+
+
+    <h1 id="HHH"></h1>
+</body>
